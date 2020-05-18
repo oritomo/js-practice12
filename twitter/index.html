@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSの勉強</title>
+  <style>
+    .job {
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    .warn {
+      font-size: 40px;
+      color: red;
+    }
+
+    .container {
+      width: 200px;
+      margin: 100px auto;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <input type="text" id="text">
+  <button id="btn">送信</button> -->
+  <div class="container">
+    <p id="show"></p>
+    <input type="text" id="text">
+    <p>３問連続で正解してください</p>
+    <p id="judge"></p>
+    <img src="" alt="" id="img">
+    <button id="btn" class="hidden">次に進む</button>
+  </div>
+
+
+  <script>
+    'use strict';
+    {
+      // const text = document.getElementById('text');
+      // const btn = document.getElementById('btn');
+
+      // btn.addEventListener('click', () => {
+      //   if (!isNaN(text.value)) {
+      //     console.log(true);
+      //   } else {
+      //     console.log(false);
+      //   }
+      // });
+
+
+
+
+
+
+      const show = document.getElementById('show');
+      const text = document.getElementById('text');
+      const judge = document.getElementById('judge');
+      const img = document.getElementById('img');
+      const btn = document.getElementById('btn')
+      let count = 0;
+
+      let a = Math.floor(Math.random() * 11);
+      let b = Math.floor(Math.random() * 11);
+      let c = a + b;
+      show.textContent = `${a} + ${b} = ?`;
+
+      function setQuestion() {
+        a = Math.floor(Math.random() * 11);
+        b = Math.floor(Math.random() * 11);
+        c = a + b;
+        show.textContent = `${a} + ${b} = ?`;
+      }
+
+      text.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          if (text.value === `${c}`) {
+            if (count < 3) 
+            { judge.textContent = '正解！'};
+            ++count;
+            img.src = ''
+            if (count === 3) {
+              img.src = 'img/atari.png';
+            };
+          };
+          if(isNaN(text.value)){
+            //isNaNが数値じゃないときは以下の処理を実行
+            alert('数値を入力してください');
+            count=0;
+            judge.textContent = '不正解！'
+          };
+          if (text.value !== `${c}`) {
+            img.src = 'img/mukiryoku_obasan.png';
+            count = 0;
+            judge.textContent = '不正解！'
+          };
+
+          text.value = ''; //inputの値をリセット
+          setQuestion();
+          console.log(count);
+        }
+      });
+    }
+  </script>
+
+
+</body>
+
+</html>
